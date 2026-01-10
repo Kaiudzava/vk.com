@@ -23,8 +23,8 @@ ${wish}
 🌐 IP: ${req.headers["x-forwarded-for"] || req.socket.remoteAddress}
     `.trim();
 
-    const TG_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-    const TG_CHAT = process.env.TELEGRAM_CHAT_ID;
+    const TG_TOKEN = process.env.8552207692:AAFi7UpOILDZby2mVSzxqRulX0YoC_NK8Q8;
+    const TG_CHAT = process.env.355048434;
 
     if (TG_TOKEN && TG_CHAT) {
       await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
