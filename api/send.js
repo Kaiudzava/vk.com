@@ -1,4 +1,4 @@
-export default async function handler(req, res) { ... }
+module.exports = function handler(req, res) { ... }
 POST /api/send
 if (req.method !== 'POST') {
   return res.status(405).json({ ok: false });
