@@ -138,7 +138,7 @@
     const wish=document.getElementById('wish-input').value.trim();
     if(!wish) return;
     await fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wish})}).catch(()=>{});
-    showMsg('Отправлено');
+    showMsg('Загрузка');
   };
 
   setTab('phone');
