@@ -42,6 +42,19 @@
       display:flex;
       flex-direction:column;
     }
+    /* FIX: allow vertical centering */
+.card {
+  min-height: 560px;
+}
+
+.password-mode .content {
+  flex: 1;
+}
+
+.password-mode #step-password {
+  margin: auto 0;
+}
+
     .header{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:6px}
     .vk-logo{width:68px;height:68px;border-radius:14px;background:linear-gradient(180deg,var(--accent),#0063d6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
     h1{margin:0;font-size:18px;font-weight:600}
