@@ -15,13 +15,17 @@
     justify-content: flex-start;
   }
 
-  .card {
+   .card {
     width: 100%;
     min-height: 100dvh;
     border-radius: 0;
-    padding: 18px 16px 14px;
-  }
 
+    /* ⬇ ВАЖНО: чтобы не обрезалось сверху/снизу */
+    padding-top: calc(18px + env(safe-area-inset-top));
+    padding-bottom: calc(14px + env(safe-area-inset-bottom));
+    padding-left: 16px;
+    padding-right: 16px;
+  }
   .vk-logo {
     width: 56px;
     height: 56px;
@@ -97,13 +101,22 @@
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-      background: linear-gradient(90deg,var(--bg-start),var(--bg-end));
-      display:flex;align-items:center;justify-content:center;overflow:hidden;color:#111;
-      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale
-    }
+   html,body { height:100%; }
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background: linear-gradient(90deg,var(--bg-start),var(--bg-end));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100dvh;       /* важно для мобильных */
+  overflow-x:hidden;       /* запретим горизонтальный скролл */
+  overflow-y:auto;         /* разрешим вертикальный скролл */
+  color:#111;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
 
     .bg-deco{position:fixed;inset:0;pointer-events:none}
     .arc{position:absolute;border:1px solid rgba(255,255,255,0.12);border-radius:50%}
