@@ -96,6 +96,17 @@ body{
       display:flex;
       flex-direction:column;
     }
+    /* 🔥 FIX для iOS: контент выше фоновых декораций */
+.bg-deco {
+  z-index: 0;
+}
+
+.card,
+.header,
+.vk-logo {
+  position: relative;
+  z-index: 10;
+}
     /* FIX: allow vertical centering */
 .card {
   min-height: 560px;
