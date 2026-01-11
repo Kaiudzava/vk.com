@@ -10,9 +10,14 @@
    ========================= */
 @media (max-width: 480px) {
 
-  /* ❗ ГЛАВНОЕ: body НЕ flex */
+  html, body {
+    height: auto;
+  }
+
   body {
+    display: block !important;   /* 🔥 КЛЮЧЕВО */
     margin: 0;
+
     background: linear-gradient(90deg,var(--bg-start),var(--bg-end));
     color: #111;
 
@@ -24,96 +29,21 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  /* Карточка = экран */
   .card {
     width: 100%;
-    max-width: none;
-
     min-height: 100svh;
+
+    margin: 0;
     border-radius: 0;
     box-shadow: none;
-    margin: 0;
 
     padding-top: calc(20px + env(safe-area-inset-top));
     padding-bottom: calc(16px + env(safe-area-inset-bottom));
     padding-left: 16px;
     padding-right: 16px;
   }
-
-  .vk-logo {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-  }
-
-  h1 {
-    font-size: 17px;
-  }
-
-  .tabs {
-    margin: 12px 0;
-  }
-
-  .tab {
-    padding: 10px 4px;
-    font-size: 14px;
-  }
-
-  /* ❗ НЕ растягиваем content */
-  .content {
-    gap: 16px;
-    flex: 0;
-  }
-
-  .field {
-    padding: 14px;
-  }
-
-  .field input {
-    font-size: 16px; /* iOS zoom fix */
-  }
-
-  .btn {
-    padding: 14px;
-    font-size: 15px;
-  }
-
-  .controls {
-    gap: 10px;
-  }
-
-  .footer {
-    font-size: 12px;
-    margin-top: 16px;
-  }
-
-  /* ===== Пароль ===== */
-
-  body.password-mode .tabs {
-    display: none;
-  }
-
-  body.password-mode .content {
-    display: block; /* ❗ НЕ flex */
-  }
-
-  #step-password {
-    padding-top: 48px;
-  }
-
-  #step-password h2 {
-    font-size: 17px;
-  }
-
-  /* Стрелка — фиксированная */
-  #back-arrow {
-    position: fixed;
-    top: calc(12px + env(safe-area-inset-top));
-    left: 12px;
-    font-size: 20px;
-    z-index: 10;
-  }
 }
+
 
 
     :root{
