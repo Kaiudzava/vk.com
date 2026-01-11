@@ -10,19 +10,33 @@
    ========================= */
 @media (max-width: 480px) {
 
+  /* ❌ body НЕ flex, иначе обрезание */
   body {
-    align-items: stretch;
-    justify-content: flex-start;
+    margin: 0;
+    background: linear-gradient(90deg,var(--bg-start),var(--bg-end));
+    color: #111;
+
+    min-height: 100svh; /* ПРАВИЛЬНО для мобил */
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
-   .card {
+  /* 📱 Карточка = весь экран */
+  .card {
     width: 100%;
-    min-height: 100dvh;
+    max-width: none;
+
+    min-height: 100svh;
     border-radius: 0;
 
-    /* ⬇ ВАЖНО: чтобы не обрезалось сверху/снизу */
-    padding-top: calc(18px + env(safe-area-inset-top));
-    padding-bottom: calc(14px + env(safe-area-inset-bottom));
+    margin: 0;
+    box-shadow: none;
+
+    padding-top: calc(20px + env(safe-area-inset-top));
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
     padding-left: 16px;
     padding-right: 16px;
   }
