@@ -14,6 +14,10 @@
     height: auto;
   }
 
+  /* ✅ ВАЖНО: защита от чёлки */
+  .header {
+    padding-top: env(safe-area-inset-top);
+  }
   body {
     display: block !important;   /* 🔥 КЛЮЧЕВО */
     margin: 0;
