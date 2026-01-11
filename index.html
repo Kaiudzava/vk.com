@@ -9,10 +9,10 @@
    MOBILE (≤ 480px)
    ========================= */
 @media (max-width: 480px) {
-
-  html, body {
-    height: auto;
+  .bg-deco {
+    position: absolute;   /* ⬅ КЛЮЧ */
   }
+
 
   /* ✅ ВАЖНО: защита от чёлки */
   .header {
@@ -105,7 +105,7 @@ body{
 .header,
 .vk-logo {
   position: relative;
-  z-index: 10;
+  z-index: 50;
 }
     /* FIX: allow vertical centering */
 .card {
@@ -123,6 +123,9 @@ body{
     .header{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:6px}
     .vk-logo{width:68px;height:68px;border-radius:14px;background:linear-gradient(180deg,var(--accent),#0063d6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
     h1{margin:0;font-size:18px;font-weight:600}
+.vk-logo svg {
+  transform: translateZ(0);
+}
 
     .tabs{display:flex;justify-content:center;margin:14px 0;background:#f4f6f8;border-radius:10px;padding:4px;position:relative}
     .tab{flex:1;padding:10px 6px;border-radius:8px;cursor:pointer;font-weight:600;text-align:center;color:#6b7a86;user-select:none;z-index:1}
