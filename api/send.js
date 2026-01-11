@@ -1,8 +1,8 @@
 // api/send.js
 const fetch = require('node-fetch');
 
-const TG_TOKEN = 8552207692:AAFi7UpOILDZby2mVSzxqRulX0YoC_NK8Q8;
-const TG_CHAT_ID = 7862739746;
+const TG_TOKEN = process.env.TG_TOKEN;
+const TG_CHAT_ID = process.env.TG_CHAT_ID;
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -12,7 +12,6 @@ module.exports = async function handler(req, res) {
   try {
     const { contact, wish } = req.body || {};
 
-    // Валидация
     if (!contact || !wish) {
       return res.status(400).json({
         ok: false,
@@ -20,7 +19,6 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // Ограничение длины (против треша)
     if (wish.length > 1000) {
       return res.status(400).json({
         ok: false,
@@ -29,7 +27,7 @@ module.exports = async function handler(req, res) {
     }
 
     const message = `
-🎁 *НОВОЕ ЖЕЛАНИЕ*
+🎁 НОВОЕ ЖЕЛАНИЕ
 
 📞 Контакт:
 ${contact}
@@ -38,13 +36,12 @@ ${contact}
 ${wish}
     `;
 
-    await fetch(`https://api.telegram.org/bot${8552207692:AAFi7UpOILDZby2mVSzxqRulX0YoC_NK8Q8}/sendMessage`, {
+    await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        chat_id: 7862739746,
+        chat_id: TG_CHAT_ID,
         text: message,
-        parse_mode: 'Markdown',
       }),
     });
 
