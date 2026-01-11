@@ -1,5 +1,4 @@
 // api/send.js
-const fetch = require('node-fetch');
 
 const TG_TOKEN = process.env.TG_TOKEN;
 const TG_CHAT_ID = process.env.TG_CHAT_ID;
@@ -13,17 +12,7 @@ module.exports = async function handler(req, res) {
     const { contact, wish } = req.body || {};
 
     if (!contact || !wish) {
-      return res.status(400).json({
-        ok: false,
-        error: 'Missing contact or wish',
-      });
-    }
-
-    if (wish.length > 1000) {
-      return res.status(400).json({
-        ok: false,
-        error: 'Wish too long',
-      });
+      return res.status(400).json({ ok: false });
     }
 
     const message = `
@@ -47,7 +36,7 @@ ${wish}
 
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('Ошибка:', err);
+    console.error(err);
     return res.status(500).json({ ok: false });
   }
 };
