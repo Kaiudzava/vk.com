@@ -8,105 +8,58 @@
     /* =========================
    MOBILE (≤ 480px)
    ========================= */
+/* =========================
+   MOBILE iOS FIX (FINAL)
+   ========================= */
 @media (max-width: 480px) {
 
   html, body {
-    height: auto;
+    height: auto !important;
   }
 
-  /* ✅ ВАЖНО: защита от чёлки */
-  .header {
-    padding-top: env(safe-area-inset-top);
-  }
   body {
-    display: block !important;   /* 🔥 КЛЮЧЕВО */
-    margin: 0;
-
-    background: linear-gradient(90deg,var(--bg-start),var(--bg-end));
-    color: #111;
-
+    display: block !important;      /* 🔥 УБИРАЕМ FLEX */
     min-height: 100svh;
-    overflow-x: hidden;
     overflow-y: auto;
-
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* ❌ fixed ломает iOS */
+  .bg-deco {
+    position: absolute !important;
+    inset: 0;
+    z-index: 0;
   }
 
   .card {
     width: 100%;
     min-height: 100svh;
-
     margin: 0;
     border-radius: 0;
     box-shadow: none;
+
+    position: relative;
+    z-index: 2;
 
     padding-top: calc(20px + env(safe-area-inset-top));
     padding-bottom: calc(16px + env(safe-area-inset-bottom));
     padding-left: 16px;
     padding-right: 16px;
   }
+
+  .header {
+    padding-top: 0;
+    position: relative;
+    z-index: 3;
+  }
+
+  .vk-logo {
+    position: relative;
+    z-index: 3;
+  }
 }
 
-
-
-    :root{
-      --card-width:380px;
-      --bg-start:#70b7ff;
-      --bg-end:#0488ff;
-      --card-radius:14px;
-      --muted:#9aa6b2;
-      --input-bg:#f6f8fa;
-      --accent:#0b75ff;
-      --shadow: 0 12px 30px rgba(8,30,60,0.12);
-      --error:#ff3347;
-    }
-
-    *{box-sizing:border-box}
-   html,body { height:100%; }
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  background: linear-gradient(90deg,var(--bg-start),var(--bg-end));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:100dvh;       /* важно для мобильных */
-  overflow-x:hidden;       /* запретим горизонтальный скролл */
-  overflow-y:auto;         /* разрешим вертикальный скролл */
-  color:#111;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-
-
-    .bg-deco{position:fixed;inset:0;pointer-events:none}
-    .arc{position:absolute;border:1px solid rgba(255,255,255,0.12);border-radius:50%}
-    .arc.a1{width:1150px;height:1150px;left:-600px;top:-500px}
-    .arc.a2{width:900px;height:900px;left:600px;top:-200px}
-    .arc.a3{width:1400px;height:1400px;left:-1000px;bottom:-400px}
-
-    .card{
-      width:var(--card-width);
-      background:linear-gradient(180deg,#ffffff,#fbfdff);
-      border-radius:var(--card-radius);
-      padding:22px 24px 16px;
-      box-shadow:var(--shadow);
-      position:relative;
-      display:flex;
-      flex-direction:column;
-    }
-    /* 🔥 FIX для iOS: контент выше фоновых декораций */
-.bg-deco {
-  z-index: 0;
-}
-
-.card,
-.header,
-.vk-logo {
-  position: relative;
-  z-index: 10;
-}
     /* FIX: allow vertical centering */
 .card {
   min-height: 560px;
