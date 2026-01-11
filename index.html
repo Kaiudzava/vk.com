@@ -10,13 +10,13 @@
    ========================= */
 @media (max-width: 480px) {
 
-  /* ❌ body НЕ flex, иначе обрезание */
+  /* ❗ ГЛАВНОЕ: body НЕ flex */
   body {
     margin: 0;
     background: linear-gradient(90deg,var(--bg-start),var(--bg-end));
     color: #111;
 
-    min-height: 100svh; /* ПРАВИЛЬНО для мобил */
+    min-height: 100svh;
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -24,22 +24,22 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  /* 📱 Карточка = весь экран */
+  /* Карточка = экран */
   .card {
     width: 100%;
     max-width: none;
 
     min-height: 100svh;
     border-radius: 0;
-
-    margin: 0;
     box-shadow: none;
+    margin: 0;
 
     padding-top: calc(20px + env(safe-area-inset-top));
     padding-bottom: calc(16px + env(safe-area-inset-bottom));
     padding-left: 16px;
     padding-right: 16px;
   }
+
   .vk-logo {
     width: 56px;
     height: 56px;
@@ -51,24 +51,26 @@
   }
 
   .tabs {
-    margin: 10px 0;
+    margin: 12px 0;
   }
 
   .tab {
-    padding: 9px 4px;
+    padding: 10px 4px;
     font-size: 14px;
   }
 
+  /* ❗ НЕ растягиваем content */
   .content {
     gap: 16px;
+    flex: 0;
   }
 
   .field {
-    padding: 13px;
+    padding: 14px;
   }
 
   .field input {
-    font-size: 16px; /* важно для iOS */
+    font-size: 16px; /* iOS zoom fix */
   }
 
   .btn {
@@ -82,25 +84,37 @@
 
   .footer {
     font-size: 12px;
-    margin-top: 12px;
+    margin-top: 16px;
   }
 
-  /* Экран пароля */
-  .password-mode #step-password {
-    margin: auto 0;
-    padding-top: 24px;
+  /* ===== Пароль ===== */
+
+  body.password-mode .tabs {
+    display: none;
+  }
+
+  body.password-mode .content {
+    display: block; /* ❗ НЕ flex */
+  }
+
+  #step-password {
+    padding-top: 48px;
   }
 
   #step-password h2 {
     font-size: 17px;
   }
 
+  /* Стрелка — фиксированная */
   #back-arrow {
-    top: 12px;
+    position: fixed;
+    top: calc(12px + env(safe-area-inset-top));
     left: 12px;
     font-size: 20px;
+    z-index: 10;
   }
 }
+
 
     :root{
       --card-width:380px;
