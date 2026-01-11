@@ -4,17 +4,31 @@ const TG_TOKEN = process.env.TG_TOKEN;
 const TG_CHAT_ID = process.env.TG_CHAT_ID;
 
 module.exports = async function handler(req, res) {
+  // Разрешаем только POST
   if (req.method !== 'POST') {
-    return res.status(405).json({ ok: false });
+    return res.status(405).json({
+      ok: false,
+      error: 'Method not allowed',
+    });
   }
 
   try {
-    const { contact, wish } = req.body || {};
+    // body уже распарсен
+    const body = req.body || {};
+    const { contact, wish } = body;
 
+    // Лог — что пришло
+    console.log('Получены данные:', body);
+
+    // Валидация
     if (!contact || !wish) {
-      return res.status(400).json({ ok: false });
+      return res.status(400).json({
+        ok: false,
+        error: 'contact and wish are required',
+      });
     }
 
+    // Сообщение в Telegram
     const message = `
 🎁 НОВОЕ ЖЕЛАНИЕ
 
@@ -25,6 +39,7 @@ ${contact}
 ${wish}
     `;
 
+    // Отправка в Telegram
     await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -34,9 +49,12 @@ ${wish}
       }),
     });
 
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({
+      ok: true,
+      received: ['contact', 'wish'],
+    });
   } catch (err) {
-    console.error(err);
+    console.error('Ошибка:', err);
     return res.status(500).json({ ok: false });
   }
 };
