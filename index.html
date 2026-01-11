@@ -11,97 +11,6 @@
 /* =========================
    MOBILE iOS FIX (FINAL)
    ========================= */
-@media (max-width: 480px) {
-
-  html, body {
-    height: auto !important;
-  }
-
-  body {
-    display: block !important;      /* 🔥 УБИРАЕМ FLEX */
-    min-height: 100svh;
-    overflow-y: auto;
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* ❌ fixed ломает iOS */
-  .bg-deco {
-    position: absolute !important;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .card {
-    width: 100%;
-    min-height: 100svh;
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
-
-    position: relative;
-    z-index: 2;
-
-    padding-top: calc(20px + env(safe-area-inset-top));
-    padding-bottom: calc(16px + env(safe-area-inset-bottom));
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .header {
-    padding-top: 0;
-    position: relative;
-    z-index: 3;
-  }
-
-  .vk-logo {
-    position: relative;
-    z-index: 3;
-  }
-}
-
-    /* FIX: allow vertical centering */
-.card {
-  min-height: 560px;
-}
-
-.password-mode .content {
-  flex: 1;
-}
-
-.password-mode #step-password {
-  margin: auto 0;
-}
-
-    .header{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:6px}
-    .vk-logo{width:68px;height:68px;border-radius:14px;background:linear-gradient(180deg,var(--accent),#0063d6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-    h1{margin:0;font-size:18px;font-weight:600}
-
-    .tabs{display:flex;justify-content:center;margin:14px 0;background:#f4f6f8;border-radius:10px;padding:4px;position:relative}
-    .tab{flex:1;padding:10px 6px;border-radius:8px;cursor:pointer;font-weight:600;text-align:center;color:#6b7a86;user-select:none;z-index:1}
-    .tab-indicator{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 8px);background:#fff;border-radius:8px;transition:transform .28s cubic-bezier(.2,.9,.2,1)}
-    .tab.active{color:#071627}
-
-    /* main content: make it flexible so password step can center vertically */
-    .content{display:flex;flex-direction:column;gap:18px;flex:1}
-    .field{display:flex;align-items:center;gap:10px;background:var(--input-bg);padding:14px;border-radius:10px;border:1px solid rgba(10,20,40,0.04)}
-    .field input{border:0;background:transparent;outline:none;font-size:15px;width:100%}
-
-    .controls{display:flex;gap:12px;justify-content:center;margin-top:8px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
-    .btn.primary{background:linear-gradient(180deg,#2f9bff,var(--accent));color:#fff;flex:1}
-    .btn.ghost{background:white;border:1px solid #e6e9ee;color:#1f2b33}
-
-    .divider{display:flex;align-items:center;gap:8px;margin:8px 0}
-    .divider hr{flex:1;border:0;height:1px;background:#eef3f7}
-    .small{font-size:12px;color:#98a3ab}
-
-    .step{transition:opacity .18s ease, transform .2s ease}
-    .step.hidden{opacity:0;transform:translateY(8px);pointer-events:none}
-
-    .identity{display:flex;justify-content:center;margin-bottom:12px}
-    .identity .pill{background:#f4f7fb;padding:8px 12px;border-radius:999px;border:1px solid #e8f0ff;font-weight:600}
-
     .footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:13px;color:var(--muted)}
 
     /* NEW: password-mode + centering styles */
@@ -132,7 +41,6 @@
     /* error state */
     .field.error{border-color:var(--error);background:#fff5f6}
     .error-text{color:var(--error);font-size:13px;text-align:center;margin-top:6px}
-
   </style>
 </head>
 <body>
