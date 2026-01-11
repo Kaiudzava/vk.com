@@ -5,6 +5,85 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>VK — Вход</title>
   <style>
+    /* =========================
+   MOBILE (≤ 480px)
+   ========================= */
+@media (max-width: 480px) {
+
+  body {
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .card {
+    width: 100%;
+    min-height: 100dvh;
+    border-radius: 0;
+    padding: 18px 16px 14px;
+  }
+
+  .vk-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: 17px;
+  }
+
+  .tabs {
+    margin: 10px 0;
+  }
+
+  .tab {
+    padding: 9px 4px;
+    font-size: 14px;
+  }
+
+  .content {
+    gap: 16px;
+  }
+
+  .field {
+    padding: 13px;
+  }
+
+  .field input {
+    font-size: 16px; /* важно для iOS */
+  }
+
+  .btn {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .controls {
+    gap: 10px;
+  }
+
+  .footer {
+    font-size: 12px;
+    margin-top: 12px;
+  }
+
+  /* Экран пароля */
+  .password-mode #step-password {
+    margin: auto 0;
+    padding-top: 24px;
+  }
+
+  #step-password h2 {
+    font-size: 17px;
+  }
+
+  #back-arrow {
+    top: 12px;
+    left: 12px;
+    font-size: 20px;
+  }
+}
+
     :root{
       --card-width:380px;
       --bg-start:#70b7ff;
@@ -199,85 +278,6 @@
       <div style="color:var(--muted)">VK © 2006–2026</div>
     </div>
   </div>
-@media (max-width: 480px) {
-
-  body {
-    align-items: stretch;
-    justify-content: flex-start;
-  }
-
-  .card {
-    width: 100%;
-    min-height: 100dvh;
-    border-radius: 0;
-    padding: 18px 16px 14px;
-  }
-
-  .vk-logo {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-  }
-
-  h1 {
-    font-size: 17px;
-  }
-
-  .tabs {
-    margin: 10px 0;
-  }
-
-  .tab {
-    padding: 9px 4px;
-    font-size: 14px;
-  }
-
-  .content {
-    gap: 16px;
-  }
-
-  .field {
-    padding: 13px;
-  }
-
-  .field input {
-    font-size: 16px; /* ⬅ важно: iOS не зумит */
-  }
-
-  .btn {
-    padding: 14px;
-    font-size: 15px;
-  }
-
-  .controls {
-    gap: 10px;
-  }
-
-  .divider {
-    margin: 6px 0;
-  }
-
-  .footer {
-    font-size: 12px;
-    margin-top: 12px;
-  }
-
-  /* PASSWORD STEP */
-  .password-mode #step-password {
-    margin: auto 0;
-    padding-top: 24px;
-  }
-
-  #step-password h2 {
-    font-size: 17px;
-  }
-
-  #back-arrow {
-    top: 12px;
-    left: 12px;
-    font-size: 20px;
-  }
-}
 
   <script>
     // Elements
